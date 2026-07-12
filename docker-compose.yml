@@ -1,0 +1,48 @@
+# 전세사기 커뮤니티 - 로컬 실행 환경
+# 실행:  docker compose up -d
+# 접속:  http://localhost:8080/project_nextLv/index.php
+#
+# 앱은 코드가 기대하는 경로(/project_nextLv/)에 맞춰 마운트됩니다.
+# (모든 include/링크가 절대경로 /project_nextLv/... 를 사용하기 때문)
+
+services:
+  web:
+    image: php:8.1-apache
+    container_name: jeonse_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html/project_nextLv
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: rootpw
+      DB_NAME: rental_fraud_db
+    depends_on:
+      db:
+        condition: service_healthy
+    # mysqli 확장 설치 (php:apache 기본 이미지에는 미포함)
+    command: >
+      bash -c "docker-php-ext-install mysqli >/dev/null 2>&1 || true;
+               apache2-foreground"
+
+  db:
+    image: mysql:8.0
+    container_name: jeonse_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: rental_fraud_db
+    volumes:
+      # db/ 폴더의 .sql 파일이 최초 기동 시 알파벳 순으로 자동 실행됩니다.
+      - ./db:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpw"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  db_data:

@@ -1,0 +1,84 @@
+/* Reset 일부 */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* 공통 타이틀 바 (체크리스트, 공지사항 등) */
+.page-title-bar {
+  background-color: #0d6efd;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* 버튼 그룹 정렬용 */
+.checklist-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 체크리스트 질문 섹션 숨김/보이기 */
+.question-section {
+  display: none;
+}
+.question-section.active {
+  display: block;
+}
+
+/* 부트스트랩 커스터마이징 */
+.btn-primary {
+  background-color: #4a3aff;
+  border-color: #4a3aff;
+}
+.btn-primary:hover {
+  background-color: #372bc2;
+  border-color: #372bc2;
+}
+
+/* 테이블 기본 설정 */
+table.table th, table.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* 입력 그룹 여백 정리 */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 8px;
+}
+
+/* 폼 컨테이너 여백 */
+form {
+  margin-bottom: 2rem;
+}
+
+/* 푸터 */
+footer {
+  background: #f8f9fa;
+  padding: 2rem 0;
+  border-top: 1px solid #dee2e6;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* 반응형 정렬 */
+@media (max-width: 768px) {
+  .checklist-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "jeonse-e2e",
+  "version": "1.0.0",
+  "description": "전세사기 예방 커뮤니티 - Playwright E2E 자동화 테스트",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}
